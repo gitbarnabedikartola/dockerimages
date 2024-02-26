@@ -51,4 +51,3 @@ jobs:
           push: true
           tags: |
             barnabenimbus/php8.2-fpm:${{ env.RELEASE }}
-            # barnabenimbus/php8.2-fpm:latest

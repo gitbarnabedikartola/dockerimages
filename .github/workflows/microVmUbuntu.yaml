@@ -51,4 +51,3 @@ jobs:
           push: true
           tags: |
             barnabenimbus/microvm_ubuntu:${{ env.RELEASE }}
-            # barnabenimbus/microvm_ubuntu:latest
