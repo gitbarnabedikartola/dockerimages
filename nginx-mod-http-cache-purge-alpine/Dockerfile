@@ -8,6 +8,8 @@ RUN apk add --no-cache nginx nginx-mod-http-cache-purge
 # COPY nginx.conf /etc/nginx/nginx.conf
 # COPY default.conf /etc/nginx/conf.d/default.conf
 
+RUN sed -i '/client_max_body_size/s/client_max_body_size/#client_max_body_size/' /etc/nginx/nginx.conf
+
 # Exponha a porta 80 e 443 para o tráfego HTTP e HTTPS
 EXPOSE 80
 
