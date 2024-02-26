@@ -1,0 +1,54 @@
+name: 'Micro VM Ubuntu'
+
+on:
+  workflow_dispatch:
+  push:
+    branches-ignore:
+      - '**'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set Release
+        shell: bash
+        run: |
+          echo "RELEASE=$(date +%Y%m%d.%H%M)" >> $GITHUB_ENV
+
+      - name: Echo Release
+        shell: bash
+        run: |
+          echo "${{ env.RELEASE }}"
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@master
+        with:
+          platforms: all
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@master
+
+      - name: Login to DockerHub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Multi-Arch
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: microVmUbuntu/Dockerfile
+          # build-args: |
+          #   PUBLIC_URL=./
+          #   NODE_IMAGE=${{ env.NODE_IMAGE }}
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            barnabenimbus/microvm_ubuntu:${{ env.RELEASE }}
+            # barnabenimbus/microvm_ubuntu:latest
