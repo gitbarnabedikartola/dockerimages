@@ -48,7 +48,7 @@ jobs:
           #   PUBLIC_URL=./
           #   NODE_IMAGE=${{ env.NODE_IMAGE }}
           #   CADDY_IMAGE=${{ env.CADDY_IMAGE }}
-          platforms: linux/amd64,linux/arm64 
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: |
             barnabenimbus/nginx-mod-http-cache-purge-alpine:${{ env.RELEASE }}
