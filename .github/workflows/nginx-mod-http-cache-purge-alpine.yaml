@@ -16,7 +16,7 @@ jobs:
       - name: Set Release
         shell: bash
         run: |
-          echo "RELEASE=$(date +%Y%m%d.%H%M)" >> GITHUB_ENV
+          echo "RELEASE=$(date +%Y%m%d.%H%M)" >> $GITHUB_ENV
           echo xpto=${{ env.RELEASE }}
 
       - name: Set up QEMU
