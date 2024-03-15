@@ -30,6 +30,7 @@ RUN apt-get update \
     iputils-ping \
     telnet \
     findutils \
+    rsync \
     php8.1 \
     php8.1-apcu \
     php8.1-imap \
