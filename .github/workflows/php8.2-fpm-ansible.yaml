@@ -1,4 +1,4 @@
-name: 'php8.2-fpm'
+name: 'php8.2-fpm-ansible'
 
 on:
   workflow_dispatch:
