@@ -43,7 +43,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: php8.2-fpm/Dockerfile
+          file: php8.2-fpm-ansible/Dockerfile
           # build-args: |
           #   PUBLIC_URL=./
           #   NODE_IMAGE=${{ env.NODE_IMAGE }}
