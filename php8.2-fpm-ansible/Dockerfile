@@ -50,6 +50,9 @@ RUN apt clean all \
   php8.2-imagick \
   ansible \
   python3-dateutil \
+  python3-celery \
+  python3-redis \
+  python3-flask \
   locales \
   && apt clean all \
   && groupadd -g 48 apache \
