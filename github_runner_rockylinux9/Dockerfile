@@ -21,8 +21,8 @@ RUN dnf install epel-release -y \
 RUN bash -c 'cat << "EOF" > /home/action/actions-runner/start-actions-runner.sh \
 #!/usr/bin/env bash \
 # Inicializa a string de saída \
-label="" \
 EOF'
+# label="" \
 # # Itera sobre cada palavra na variável labels
 # for label in \$labels; do
 #   # Acrescenta cada palavra formatada à string de saída
