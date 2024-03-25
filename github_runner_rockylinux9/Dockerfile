@@ -18,9 +18,9 @@ RUN dnf install epel-release -y \
 
 # COPY start-actions-runner.sh /home/action/actions-runner/
 
-RUN cat << EOF > /home/action/actions-runner/start-actions-runner.sh
-#!/usr/bin/env bash
-# Inicializa a string de saída
+RUN cat << EOF > /home/action/actions-runner/start-actions-runner.sh \
+#!/usr/bin/env bash \
+# Inicializa a string de saída \
 EOF
 
 # label="" \
