@@ -21,14 +21,13 @@ RUN dnf install epel-release -y \
 RUN <<EOF cat >> /home/action/actions-runner/start-actions-runner.sh
 #!/usr/bin/env bash
 # Inicializa a string de saída
+label=""
+# Itera sobre cada palavra na variável labels
+for label in $labels; do
+  # Acrescenta cada palavra formatada à string de saída
+  label+="--labels=$label "
+done
 EOF
-
-# label="" \
-# # Itera sobre cada palavra na variável labels
-# for label in \$labels; do
-#   # Acrescenta cada palavra formatada à string de saída
-#   label+="--labels=\$label "
-# done
 # # Remove o último espaço extra
 # label=\$(echo \$label | sed "s/ \$//")
 # if [ "\$ephemeral" = "true" ];then
