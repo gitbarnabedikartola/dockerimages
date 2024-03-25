@@ -54,4 +54,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            barnabenimbus/${{ env.RELEASE }}":${{ env.RELEASETAG }}
+            barnabenimbus/${{ env.RELEASE }}:${{ env.RELEASETAG }}
