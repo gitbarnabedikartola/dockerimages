@@ -17,5 +17,4 @@ RUN dnf install epel-release -y \
   && bash ./bin/installdependencies.sh \
   && chown action:action -R /home/action/actions-runner
 
-CMD [ "su" "-" "action" "-c" "bash /home/action/actions-runner/config.sh --url $url --token $token --runnergroup $runnergroup --name $name --labels $labels --unattended ; bash /home/action/actions-runner/run.sh"  ]
-
+CMD [ "su" "action" "-c" "cd /home/action/actions-runner ; bash config.sh --url $url --token $token --runnergroup $runnergroup --name $name --labels $labels --unattended ; bash run.sh"  ]
