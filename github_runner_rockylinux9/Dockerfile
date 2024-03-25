@@ -15,10 +15,10 @@ RUN dnf install epel-release -y \
   && rm -f actions-runner-linux-x64-${version}.tar.gz \
   && echo "$version" > version.txt \
   && bash ./bin/installdependencies.sh \
-  && echo -e '#!/usr/bin/env bash\nsu action -c "cd /home/action/actions-runner ; bash config.sh --url $url --token $token --runnergroup $runnergroup --name $name --labels $labels --unattended ; bash run.sh"' | tee /home/action/actions-runner/start-actions-runner.sh \
+  && echo -e '#!/usr/bin/env bash\nsu action -c "cd /home/action/actions-runner ; bash config.sh --url $url --token $token --runnergroup $runnergroup --name $name --labels $labels --unattended ; bash run.sh ; bash config.sh remove --token $token"' | tee /home/action/actions-runner/start-actions-runner.sh \
   && chmod +x /home/action/actions-runner/start-actions-runner.sh \
   && chown action:action -R /home/action/actions-runner
 
 WORKDIR /home/action/actions-runner
 
-# ENTRYPOINT ["/home/action/actions-runner/start-actions-runner.sh"]
+ENTRYPOINT ["/home/action/actions-runner/start-actions-runner.sh"]
