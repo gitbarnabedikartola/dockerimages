@@ -24,6 +24,7 @@ jobs:
       - name: Echo Release
         shell: bash
         run: |
+          echo "RELEASE and TAG"
           echo "Release= ${{ env.RELEASE }}"
           echo "Tag= ${{ env.RELEASETAG }}"
 
