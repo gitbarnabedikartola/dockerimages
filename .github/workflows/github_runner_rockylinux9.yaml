@@ -16,12 +16,16 @@ jobs:
       - name: Set Release
         shell: bash
         run: |
-          echo "RELEASE=$(date +%Y%m%d.%H%M)" >> $GITHUB_ENV
+          RELEASE=github_runner_rockylinux9
+          
+          echo "RELEASE=$RELEASE" >> $GITHUB_ENV
+          echo "RELEASETAG=$(date +%Y%m%d.%H%M)" >> $GITHUB_ENV
 
       - name: Echo Release
         shell: bash
         run: |
-          echo "${{ env.RELEASE }}"
+          echo "Release= ${{ env.RELEASE }}"
+          echo "Tag= ${{ env.RELEASETAG }}"
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@master
@@ -43,11 +47,11 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: microVmUbuntu/Dockerfile
+          file: ${{ env.RELEASE }}/Dockerfile
           # build-args: |
           #   PUBLIC_URL=./
           #   NODE_IMAGE=${{ env.NODE_IMAGE }}
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            barnabenimbus/github_runner_rockylinux9:${{ env.RELEASE }}
+            barnabenimbus/${{ env.RELEASE }}":${{ env.RELEASETAG }}
