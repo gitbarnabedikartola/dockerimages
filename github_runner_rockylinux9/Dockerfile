@@ -18,24 +18,24 @@ RUN dnf install epel-release -y \
 
 # COPY start-actions-runner.sh /home/action/actions-runner/
 
-RUN bash -c 'cat << "EOF" > /home/action/actions-runner/start-actions-runner.sh
-#!/usr/bin/env bash
-# Inicializa a string de saída
-label=""
-# Itera sobre cada palavra na variável labels
-for label in $labels; do
-  # Acrescenta cada palavra formatada à string de saída
-  label+="--labels=$label "
-done
-# Remove o último espaço extra
-label=$(echo $label | sed 's/ $//')
-if [ "$ephemeral" = "true" ];then
-  ephemeralTrue='--ephemeral'
-else
-  ephemeralTrue=""
-fi
-# run github_runner
-su action -c "cd /home/action/actions-runner ; bash config.sh --url $url --token $token --runnergroup $runnergroup --name $name $label --unattended $ephemeralTrue; bash run.sh"
+RUN bash -c 'cat << "EOF" > /home/action/actions-runner/start-actions-runner.sh \
+#!/usr/bin/env bash \
+# Inicializa a string de saída \
+label="" \
+# Itera sobre cada palavra na variável labels \
+for label in $labels; do \
+  # Acrescenta cada palavra formatada à string de saída \
+  label+="--labels=$label " \
+done \
+# Remove o último espaço extra \
+label=$(echo $label | sed 's/ $//') \
+if [ "$ephemeral" = "true" ];then \
+  ephemeralTrue='--ephemeral' \
+else \
+  ephemeralTrue="" \
+fi \
+# run github_runner \
+su action -c "cd /home/action/actions-runner ; bash config.sh --url \$url --token \$token --runnergroup \$runnergroup --name \$name \$label --unattended \$ephemeralTrue; bash run.sh" \
 EOF'
 
 RUN chmod +x /home/action/actions-runner/start-actions-runner.sh \
