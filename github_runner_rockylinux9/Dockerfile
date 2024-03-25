@@ -3,7 +3,7 @@ FROM rockylinux:9
 ENV version=2.314.1
 
 RUN dnf install epel-release -y \
-  && dnf intall -y \
+  && dnf install -y \
     sudo \
     tmate \
   && dnf clean all \
