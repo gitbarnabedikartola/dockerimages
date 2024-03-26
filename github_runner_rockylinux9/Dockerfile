@@ -20,9 +20,10 @@ for l in $labels; do
   label+="$l,"
 done
 
-# Remove o último espaço extra
+# verifica se o runner é ephemeral
 if [ "$ephemeral" = "true" ];then
   ephemeralTrue="--ephemeral"
+  rm -rf _work
 else
   ephemeralTrue=""
 fi
