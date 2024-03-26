@@ -14,6 +14,7 @@ label=$(echo $label | sed 's/ $//')
 
 if [ "$ephemeral" = "true" ];then
   ephemeralTrue='--ephemeral'
+  rm -rf _work
 else
   ephemeralTrue=""
 fi
