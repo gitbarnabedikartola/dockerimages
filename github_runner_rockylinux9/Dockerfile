@@ -29,20 +29,19 @@ RUN dnf install epel-release -y \
   && curl -fsSL https://cli.github.com/packages/rpm/gh-cli.repo | tee /etc/yum.repos.d/github-cli.repo \
   && dnf install -y \
     gh \
+    jq \
     git \
     sudo \
     tmate \
   && dnf clean all \
   && cd /home/action/actions-runner \
-  && version=$(gh release -R actions/runner list | grep Latest | awk '{print $1}' | sed 's/v//') \
-  && echo "xpto=$version"
-#   && curl -o actions-runner-linux-x64-${version}.tar.gz -L https://github.com/actions/runner/releases/download/v${version}/actions-runner-linux-x64-${version}.tar.gz \
-#   && tar xzf ./actions-runner-linux-x64-${version}.tar.gz \
-#   && rm -f actions-runner-linux-x64-${version}.tar.gz \
-#   && echo "$version" > version.txt \
-#   && bash ./bin/installdependencies.sh \
-#   && chmod +x /home/action/actions-runner/start-actions-runner.sh \
-#   && chown action:action -R /home/action/actions-runner
+  && curl -s https://api.github.com/repos/actions/runner/releases/latest | jq -r '.assets[] | select(.name | contains("actions-runner-linux-x64-")) |  .browser_download_url' | xargs curl -L -o actions-runner-linux.tar.gz \
+  && tar xzf ./actions-runner-linux.tar.gz \
+  && rm -f actions-runner-linux.tar.gz \
+  && echo $(curl -s https://api.github.com/repos/actions/runner/releases/latest | jq -r '.tag_name') > version.txt \
+  && bash ./bin/installdependencies.sh \
+  && chmod +x /home/action/actions-runner/start-actions-runner.sh \
+  && chown action:action -R /home/action/actions-runner
 
 WORKDIR /home/action/actions-runner
 
