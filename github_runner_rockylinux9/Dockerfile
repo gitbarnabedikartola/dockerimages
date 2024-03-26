@@ -5,9 +5,15 @@ RUN useradd action \
 && <<"EOF" cat >> /home/action/actions-runner/start-actions-runner.sh
 #!/usr/bin/env bash
 
+# get a new token using userToken or use token defined for the runner
+if [ -n "$userToken" ];then
+  token=$(curl -s -L -X POST -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $userToken" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/orgs/$repo/actions/runners/registration-token | grep -Eo "[A-Z0-9]{29}")
+else
+  token=$runnerToken
+fi
+
 # Inicializa a string de saída
 label="--labels "
-
 # Itera sobre cada palavra na variável labels
 for l in $labels; do
   # Acrescenta cada palavra formatada à string de saída
@@ -22,7 +28,7 @@ else
 fi
 
 # run github_runner
-su action -c "cd /home/action/actions-runner ; bash config.sh --url $url --token $token --runnergroup $runnergroup --name $name $label --unattended $ephemeralTrue; bash run.sh"
+su action -c "cd /home/action/actions-runner ; bash config.sh --url https://github.com/$repo --token $token --runnergroup $runnergroup --name $name $label --unattended $ephemeralTrue; bash run.sh"
 EOF
 
 RUN dnf install epel-release -y \
