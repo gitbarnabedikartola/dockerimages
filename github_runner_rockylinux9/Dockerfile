@@ -14,7 +14,7 @@ RUN dnf install epel-release -y \
   && tar xzf ./actions-runner-linux-x64-${version}.tar.gz \
   && rm -f actions-runner-linux-x64-${version}.tar.gz \
   && echo "$version" > version.txt \
-  && bash ./bin/installdependencies.sh
+  && bash ./bin/installdependencies.sh \
 && <<"EOF" cat >> /home/action/actions-runner/start-actions-runner.sh
 #!/usr/bin/env bash
 
@@ -24,7 +24,7 @@ label=""
 # Itera sobre cada palavra na variável labels
 for l in $labels; do
   # Acrescenta cada palavra formatada à string de saída
-  label+="--labels=$l "
+  label+="--labels $l "
 done
 
 # Remove o último espaço extra
