@@ -13,11 +13,10 @@ label=""
 # Itera sobre cada palavra na variável labels
 for l in $labels; do
   # Acrescenta cada palavra formatada à string de saída
-  label+="--labels $l "
+  label+="$l,"
 done
 
 # Remove o último espaço extra
-label=$(echo $label | sed "s/ $//")
 if [ "$ephemeral" = "true" ];then
   ephemeralTrue="--ephemeral"
 else
