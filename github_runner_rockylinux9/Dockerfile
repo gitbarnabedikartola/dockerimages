@@ -16,9 +16,7 @@ RUN dnf install epel-release -y \
   && echo "$version" > version.txt \
   && bash ./bin/installdependencies.sh
 
-# COPY start-actions-runner.sh /home/action/actions-runner/
-
-RUN <<EOF cat >> /home/action/actions-runner/start-actions-runner.sh
+RUN <<"EOF" cat >> /home/action/actions-runner/start-actions-runner.sh
 #!/usr/bin/env bash
 
 # Inicializa a string de saída
