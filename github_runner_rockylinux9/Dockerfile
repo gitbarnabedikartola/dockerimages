@@ -37,14 +37,9 @@ fi
 
 # run github_runner
 su action -c "cd /home/action/actions-runner ; bash config.sh --url $url --token $token --runnergroup $runnergroup --name $name $label --unattended $ephemeralTrue; bash run.sh"
-EOF
-
-RUN chmod +x /home/action/actions-runner/start-actions-runner.sh \
-  && chown action:action -R /home/action/actions-runner
-
-#   && echo -e '#!/usr/bin/env bash\nsu action -c "cd /home/action/actions-runner ; bash config.sh --url $url --token $token --runnergroup $runnergroup --name $name --labels $labels --unattended --ephemeral; bash run.sh"' | tee /home/action/actions-runner/start-actions-runner.sh \
-#   && chmod +x /home/action/actions-runner/start-actions-runner.sh \
-#; bash config.sh remove --token $token
+EOF \
+&& chmod +x /home/action/actions-runner/start-actions-runner.sh \
+&& chown action:action -R /home/action/actions-runner
 
 WORKDIR /home/action/actions-runner
 
