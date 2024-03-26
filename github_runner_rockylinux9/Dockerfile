@@ -23,9 +23,9 @@ RUN <<"EOF" cat >> /home/action/actions-runner/start-actions-runner.sh
 label=""
 
 # Itera sobre cada palavra na variável labels
-for label in $labels; do
+for l in $labels; do
   # Acrescenta cada palavra formatada à string de saída
-  label+="--labels=$label "
+  label+="--labels=$l "
 done
 
 # Remove o último espaço extra
