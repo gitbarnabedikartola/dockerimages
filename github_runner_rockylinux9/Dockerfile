@@ -1,7 +1,5 @@
 FROM rockylinux:9
 
-ENV version=2.314.1
-
 RUN useradd action \
 && mkdir -p /home/action/actions-runner \
 && <<"EOF" cat >> /home/action/actions-runner/start-actions-runner.sh
@@ -33,6 +31,7 @@ RUN dnf install epel-release -y \
     tmate \
   && dnf clean all \
   && cd /home/action/actions-runner \
+  && version=$(gh release -R actions/runner list | grep Latest | awk '{print $1}' | sed 's/v//') \
   && curl -o actions-runner-linux-x64-${version}.tar.gz -L https://github.com/actions/runner/releases/download/v${version}/actions-runner-linux-x64-${version}.tar.gz \
   && tar xzf ./actions-runner-linux-x64-${version}.tar.gz \
   && rm -f actions-runner-linux-x64-${version}.tar.gz \
