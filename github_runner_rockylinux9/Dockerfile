@@ -25,11 +25,11 @@ fi
 su action -c "cd /home/action/actions-runner ; bash config.sh --url $url --token $token --runnergroup $runnergroup --name $name $label --unattended $ephemeralTrue; bash run.sh"
 EOF
 
-RUN version=$(gh release -R actions/runner list | grep Latest | awk '{print $1}' | sed 's/v//') \
-&& echo $version
-
 RUN dnf install epel-release -y \
+  && curl -fsSL https://cli.github.com/packages/rpm/gh-cli.repo | tee /etc/yum.repos.d/github-cli.repo \
   && dnf install -y \
+    gh \
+    git \
     sudo \
     tmate \
   && dnf clean all \
