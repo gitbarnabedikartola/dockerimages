@@ -44,4 +44,4 @@ RUN dnf install epel-release -y \
 
 WORKDIR /home/action/actions-runner
 
-# ENTRYPOINT ["/home/action/actions-runner/start-actions-runner.sh"]
+ENTRYPOINT ["/home/action/actions-runner/start-actions-runner.sh"]
