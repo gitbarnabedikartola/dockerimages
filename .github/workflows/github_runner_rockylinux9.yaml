@@ -27,6 +27,12 @@ jobs:
           echo "RELEASE and TAG"
           echo "Release= ${{ env.RELEASE }}"
           echo "Tag= ${{ env.RELEASETAG }}"
+          
+      - name: Install Dependencies
+        shell: bash
+        run: |
+          sudo apt update
+          sudo apt install -y gh
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@master
