@@ -51,4 +51,4 @@ RUN chmod +x /home/action/actions-runner/start-actions-runner.sh \
 
 WORKDIR /home/action/actions-runner
 
-ENTRYPOINT ["/home/action/actions-runner/start-actions-runner.sh"]
+# ENTRYPOINT ["/home/action/actions-runner/start-actions-runner.sh"]
