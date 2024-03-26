@@ -15,8 +15,7 @@ RUN dnf install epel-release -y \
   && rm -f actions-runner-linux-x64-${version}.tar.gz \
   && echo "$version" > version.txt \
   && bash ./bin/installdependencies.sh
-
-RUN <<"EOF" cat >> /home/action/actions-runner/start-actions-runner.sh
+&& <<"EOF" cat >> /home/action/actions-runner/start-actions-runner.sh
 #!/usr/bin/env bash
 
 # Inicializa a string de saída
