@@ -2,19 +2,8 @@ FROM rockylinux:9
 
 ENV version=2.314.1
 
-RUN dnf install epel-release -y \
-  && dnf install -y \
-    sudo \
-    tmate \
-  && dnf clean all \
-  && useradd action \
-  && mkdir -p /home/action/actions-runner \
-  && cd /home/action/actions-runner \
-  && curl -o actions-runner-linux-x64-${version}.tar.gz -L https://github.com/actions/runner/releases/download/v${version}/actions-runner-linux-x64-${version}.tar.gz \
-  && tar xzf ./actions-runner-linux-x64-${version}.tar.gz \
-  && rm -f actions-runner-linux-x64-${version}.tar.gz \
-  && echo "$version" > version.txt \
-  && bash ./bin/installdependencies.sh \
+RUN useradd action \
+&& mkdir -p /home/action/actions-runner \
 && <<"EOF" cat >> /home/action/actions-runner/start-actions-runner.sh
 #!/usr/bin/env bash
 
@@ -38,8 +27,20 @@ fi
 # run github_runner
 su action -c "cd /home/action/actions-runner ; bash config.sh --url $url --token $token --runnergroup $runnergroup --name $name $label --unattended $ephemeralTrue; bash run.sh"
 EOF
-&& chmod +x /home/action/actions-runner/start-actions-runner.sh \
-&& chown action:action -R /home/action/actions-runner
+
+RUN dnf install epel-release -y \
+  && dnf install -y \
+    sudo \
+    tmate \
+  && dnf clean all \
+  && cd /home/action/actions-runner \
+  && curl -o actions-runner-linux-x64-${version}.tar.gz -L https://github.com/actions/runner/releases/download/v${version}/actions-runner-linux-x64-${version}.tar.gz \
+  && tar xzf ./actions-runner-linux-x64-${version}.tar.gz \
+  && rm -f actions-runner-linux-x64-${version}.tar.gz \
+  && echo "$version" > version.txt \
+  && bash ./bin/installdependencies.sh \
+  && chmod +x /home/action/actions-runner/start-actions-runner.sh \
+  && chown action:action -R /home/action/actions-runner
 
 WORKDIR /home/action/actions-runner
 
