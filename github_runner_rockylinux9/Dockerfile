@@ -35,13 +35,14 @@ RUN dnf install epel-release -y \
   && dnf clean all \
   && cd /home/action/actions-runner \
   && version=$(gh release -R actions/runner list | grep Latest | awk '{print $1}' | sed 's/v//') \
-  && curl -o actions-runner-linux-x64-${version}.tar.gz -L https://github.com/actions/runner/releases/download/v${version}/actions-runner-linux-x64-${version}.tar.gz \
-  && tar xzf ./actions-runner-linux-x64-${version}.tar.gz \
-  && rm -f actions-runner-linux-x64-${version}.tar.gz \
-  && echo "$version" > version.txt \
-  && bash ./bin/installdependencies.sh \
-  && chmod +x /home/action/actions-runner/start-actions-runner.sh \
-  && chown action:action -R /home/action/actions-runner
+  && echo "xpto=$version"
+#   && curl -o actions-runner-linux-x64-${version}.tar.gz -L https://github.com/actions/runner/releases/download/v${version}/actions-runner-linux-x64-${version}.tar.gz \
+#   && tar xzf ./actions-runner-linux-x64-${version}.tar.gz \
+#   && rm -f actions-runner-linux-x64-${version}.tar.gz \
+#   && echo "$version" > version.txt \
+#   && bash ./bin/installdependencies.sh \
+#   && chmod +x /home/action/actions-runner/start-actions-runner.sh \
+#   && chown action:action -R /home/action/actions-runner
 
 WORKDIR /home/action/actions-runner
 
