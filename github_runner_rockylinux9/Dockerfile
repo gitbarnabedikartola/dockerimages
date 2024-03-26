@@ -25,6 +25,9 @@ fi
 su action -c "cd /home/action/actions-runner ; bash config.sh --url $url --token $token --runnergroup $runnergroup --name $name $label --unattended $ephemeralTrue; bash run.sh"
 EOF
 
+RUN version=$(gh release -R actions/runner list | grep Latest | awk '{print $1}' | sed 's/v//') \
+&& echo $version
+
 RUN dnf install epel-release -y \
   && dnf install -y \
     sudo \
