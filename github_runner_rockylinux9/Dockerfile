@@ -8,7 +8,7 @@ RUN useradd action \
 #!/usr/bin/env bash
 
 # Inicializa a string de saída
-label=""
+label="--labels "
 
 # Itera sobre cada palavra na variável labels
 for l in $labels; do
