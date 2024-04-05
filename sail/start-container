@@ -10,8 +10,37 @@ fi
 
 chmod -R ugo+rw /.composer
 
-sed -i "/newrelic.license/s/.*/newrelic.license = \"$NEW_RELIC_LICENSE_KEY\"/" /etc/php/8.2/mods-available/newrelic.ini
-sed -i "/newrelic.appname/s/.*/newrelic.appname = \"$NEW_RELIC_APP_NAME\"/" /etc/php/8.2/mods-available/newrelic.ini
+sed -i "/newrelic.license =/s/.*/newrelic.license = \"$NEW_RELIC_LICENSE_KEY\"/" /etc/php/8.2/mods-available/newrelic.ini
+sed -i "/newrelic.appname =/s/.*/newrelic.appname = \"$NEW_RELIC_APP_NAME\"/" /etc/php/8.2/mods-available/newrelic.ini
+# sed -i '/newrelic.application_logging.enabled =/s/.*/newrelic.application_logging.enabled = true/' /etc/php/8.2/mods-available/newrelic.ini
+# sed -i '/newrelic.application_logging.metrics.enabled =/s/.*/newrelic.application_logging.metrics.enabled = true/' /etc/php/8.2/mods-available/newrelic.ini
+# sed -i '/newrelic.application_logging.forwarding.enabled =/s/.*/newrelic.application_logging.forwarding.enabled = true/' /etc/php/8.2/mods-available/newrelic.ini
+
+echo "[SERVICE]
+    flush        1
+    daemon       Off
+
+[INPUT]
+    Name        tail
+    Path        /var/www/html/storage/logs/*.log
+    Parser      json
+    Tag         $NEW_RELIC_APP_NAME
+
+[OUTPUT]
+    Name        http
+    Match       *
+    Host        log-api.newrelic.com
+    Port        443
+    TLS         On
+    TLS.verify  Off
+    HTTP_User   $NEW_RELIC_LICENSE_KEY
+    HTTP_Passwd x
+    URI         /log/v1
+    Format      json
+    Header      Content-Type application/json
+    Header      X-License-Key $NEW_RELIC_LICENSE_KEY
+    Header      X-Event-Source logs
+    Compress    gzip" > /etc/fluent-bit/fluent-bit.conf
 
 if [ $# -gt 0 ]; then
     exec gosu $WWWUSER "$@"

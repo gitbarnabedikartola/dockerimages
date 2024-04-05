@@ -45,13 +45,10 @@ RUN apt-get update \
     && echo 'deb http://apt.newrelic.com/debian/ newrelic non-free' | tee /etc/apt/sources.list.d/newrelic.list \
     && apt update \
     && apt install -y newrelic-php5 \
+    && curl https://raw.githubusercontent.com/fluent/fluent-bit/master/install.sh | sh \
     && apt-get -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-#     && NR_INSTALL_SILENT=1 newrelic-install install
-    
-ENV NEW_RELIC_LICENSE_KEY=YOUR_LICENSE_KEY
-ENV NEW_RELIC_APP_NAME=APP_NAME
 
 RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.2
 
