@@ -48,7 +48,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ${{ env.RELEASE }}/Dockerfile
+          file: ${{ env.RELEASE }}/sail.Dockerfile
           # build-args: |
           #   PUBLIC_URL=./
           #   NODE_IMAGE=${{ env.NODE_IMAGE }}
