@@ -19,6 +19,8 @@ sed -i "/newrelic.appname =/s/.*/newrelic.appname = \"$NEW_RELIC_APP_NAME\"/" /e
 echo "[SERVICE]
     flush        1
     daemon       Off
+    parsers_file parsers.conf
+    plugins_file plugins.conf
 
 [INPUT]
     Name        tail
