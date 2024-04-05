@@ -47,8 +47,8 @@ RUN apt-get update \
     && apt install -y newrelic-php5 \
     && apt-get -y autoremove \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && NR_INSTALL_SILENT=1 newrelic-install install
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+#     && NR_INSTALL_SILENT=1 newrelic-install install
     
 ENV NEW_RELIC_LICENSE_KEY=YOUR_LICENSE_KEY
 ENV NEW_RELIC_APP_NAME=APP_NAME
