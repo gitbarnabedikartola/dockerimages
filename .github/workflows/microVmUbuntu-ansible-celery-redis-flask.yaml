@@ -16,7 +16,7 @@ jobs:
       - name: Set Release
         shell: bash
         run: |
-          RELEASE=microVmUbuntu-ansible-celery-redis-flask
+          RELEASE=microvm-ubuntu-ansible-celery-redis-flask
           
           echo "RELEASE=$RELEASE" >> $GITHUB_ENV
           echo "RELEASETAG=$(date +%Y%m%d.%H%M)" >> $GITHUB_ENV
