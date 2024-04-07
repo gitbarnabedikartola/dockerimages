@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Instalar dependências
 RUN apt update \
-  apt install -y \
+  && apt install -y \
     python3-flask
 
 # Copiar o código da aplicação para o container
