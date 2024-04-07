@@ -7,14 +7,17 @@ WORKDIR /app
 # Instalar dependências
 RUN apt update \
   && apt install -y \
-    python3-flask \
+    ansible \
     openssh-server \
     vim \
     nano \
   && mkdir -p -m0755 /var/run/sshd
 
+COPY python-flask/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
 # Copiar o código da aplicação para o container
-# COPY . /app
+# COPY python-flask/app/* /app
 
 # Expor a porta do Flask
 EXPOSE 5000
