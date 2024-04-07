@@ -7,7 +7,11 @@ WORKDIR /app
 # Instalar dependências
 RUN apt update \
   && apt install -y \
-    python3-flask
+    python3-flask \
+    openssh-server \
+    vim \
+    nano \
+  && mkdir -p -m0755 /var/run/sshd
 
 # Copiar o código da aplicação para o container
 # COPY . /app
