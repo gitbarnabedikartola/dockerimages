@@ -67,6 +67,7 @@ RUN apt-get update \
     php8.1-imagick \
     ansible \
     python3-dateutil \
+    python3-flask \
  && locale-gen pt_BR.UTF-8 \
  && ln -fs /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime \
  && dpkg-reconfigure --frontend noninteractive tzdata \
