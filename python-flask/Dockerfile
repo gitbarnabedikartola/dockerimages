@@ -8,9 +8,11 @@ WORKDIR /app
 RUN apt update \
   && apt install -y \
     ansible \
+    python3-hcloud \
     openssh-server \
     vim \
     nano \
+    curl \
   && mkdir -p -m0755 /var/run/sshd
 
 COPY python-flask/requirements.txt .
