@@ -45,7 +45,6 @@ RUN apt update \
   && apt install -y \
     gh \
     jq \
-    vi \
     git \
     vim \
     curl \
