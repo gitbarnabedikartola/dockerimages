@@ -46,6 +46,7 @@ RUN apt update \
     curl \
     sudo \
     tmate \
+  && curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh \
   && echo 'action ALL=(ALL) NOPASSWD:ALL' | tee -a /etc/sudoers \
   && cd /home/action/actions-runner \
   && curl -s https://api.github.com/repos/actions/runner/releases/latest | jq -r '.assets[] | select(.name | contains("actions-runner-linux-x64-")) |  .browser_download_url' | xargs curl -L -o actions-runner-linux.tar.gz \
