@@ -30,6 +30,7 @@ fi
 
 # Enable Docker
 dockerd &
+sleep 10
 
 # run github_runner
 su action -c "cd /home/action/actions-runner ; bash config.sh --url https://github.com/$repo --token $token --runnergroup $runnergroup --name $name $label --unattended $ephemeralTrue; bash run.sh"
