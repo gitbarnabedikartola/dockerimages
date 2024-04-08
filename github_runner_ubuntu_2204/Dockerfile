@@ -28,6 +28,9 @@ else
   ephemeralTrue=""
 fi
 
+# Enable Docker
+dockerd &
+
 # run github_runner
 su action -c "cd /home/action/actions-runner ; bash config.sh --url https://github.com/$repo --token $token --runnergroup $runnergroup --name $name $label --unattended $ephemeralTrue; bash run.sh"
 EOF
@@ -42,11 +45,15 @@ RUN apt update \
   && apt install -y \
     gh \
     jq \
+    vi \
     git \
+    vim \
     curl \
+    nano \
     sudo \
     tmate \
   && curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh \
+  && usermod -aG docker action \
   && echo 'action ALL=(ALL) NOPASSWD:ALL' | tee -a /etc/sudoers \
   && cd /home/action/actions-runner \
   && curl -s https://api.github.com/repos/actions/runner/releases/latest | jq -r '.assets[] | select(.name | contains("actions-runner-linux-x64-")) |  .browser_download_url' | xargs curl -L -o actions-runner-linux.tar.gz \
