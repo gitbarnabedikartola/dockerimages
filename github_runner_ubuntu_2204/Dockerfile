@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-RUN useradd action \
+RUN useradd -m -s /bin/bash action \
 && mkdir -p /home/action/actions-runner \
 && <<"EOF" cat >> /home/action/actions-runner/start-actions-runner.sh
 #!/usr/bin/env bash
@@ -32,7 +32,10 @@ fi
 su action -c "cd /home/action/actions-runner ; bash config.sh --url https://github.com/$repo --token $token --runnergroup $runnergroup --name $name $label --unattended $ephemeralTrue; bash run.sh"
 EOF
 
-RUN mkdir -p -m 755 /etc/apt/keyrings && wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+RUN apt update \
+  && apt install -y wget \
+  && mkdir -p -m 755 /etc/apt/keyrings \
+  && wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
   && chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
   && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
   && apt update \
@@ -40,8 +43,10 @@ RUN mkdir -p -m 755 /etc/apt/keyrings && wget -qO- https://cli.github.com/packag
     gh \
     jq \
     git \
+    curl \
     sudo \
     tmate \
+  && echo 'action ALL=(ALL) NOPASSWD:ALL' | tee -a /etc/sudoers \
   && cd /home/action/actions-runner \
   && curl -s https://api.github.com/repos/actions/runner/releases/latest | jq -r '.assets[] | select(.name | contains("actions-runner-linux-x64-")) |  .browser_download_url' | xargs curl -L -o actions-runner-linux.tar.gz \
   && tar xzf ./actions-runner-linux.tar.gz \
