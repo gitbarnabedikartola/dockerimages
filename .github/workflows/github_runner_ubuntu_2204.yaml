@@ -1,10 +1,10 @@
-name: 'Python Flask'
+name: 'GitHub Runner Ubuntu 22.04'
 
 on:
   workflow_dispatch:
   push:
-    branches-ignore:
-      - '**'
+    # branches-ignore:
+      # - '**'
 
 jobs:
   docker:
@@ -16,7 +16,7 @@ jobs:
       - name: Set Release
         shell: bash
         run: |
-          RELEASE=python-flask
+          RELEASE=github_runner_ubuntu_2204
           
           echo "RELEASE=$RELEASE" >> $GITHUB_ENV
           echo "RELEASETAG=$(date +%Y%m%d.%H%M)" >> $GITHUB_ENV
@@ -31,7 +31,7 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@master
         with:
-          platforms: all
+          platforms: arm64,amd64
 
       - name: Set up Docker Buildx
         id: buildx

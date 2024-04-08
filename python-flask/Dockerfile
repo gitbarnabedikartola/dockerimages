@@ -11,7 +11,6 @@ RUN apt update \
     python3-hcloud \
     openssh-server \
     vim \
-    nano \
     curl \
   && mkdir -p -m0755 /var/run/sshd
 
