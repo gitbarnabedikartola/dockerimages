@@ -24,4 +24,4 @@ else
 fi
 
 # run github_runner
-cd /home/action/actions-runner ; bash config.sh --url https://github.com/$repo --token $token --runnergroup $runnergroup --name $name $label --unattended $ephemeralTrue; bash run.sh
+su action -c "cd /home/action/actions-runner ; bash config.sh --url https://github.com/$repo --token $token --runnergroup $runnergroup --name $name $label --unattended $ephemeralTrue; bash run.sh"
