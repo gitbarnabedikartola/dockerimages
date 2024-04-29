@@ -5,7 +5,7 @@ FROM rockylinux:9
 RUN dnf upgrade -y --refresh \
   && dnf -y install epel-release \
   && dnf -y update \
-  && dnf -y install \
+  && dnf -y install --allowerasing \
     mysql \
     openssh-server \
     nano \
@@ -19,30 +19,30 @@ RUN dnf upgrade -y --refresh \
     wget \
     curl \
     telnet \
-    htop 
-#     php \
-#     php-common \
-#     php-mysql \
-#     php-mysqlnd \
-#     php-gd \
-#     php-xml \
-#     php-mbstring \
-#     php-mcrypt \
-#     php-zip \
-#     php-intl \
-#     php-fpm \
-#     php-cli \
-#     php-redis \
-#     php-opcache \
-#     php-pgsql \
-#     php-ldap \
-#     php-bcmath \
-#     php-mysqlnd \
-#   && dnf clean \
-#   && wget -qO /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
-#   && chmod +x /usr/local/bin/wp
+    htop \
+    php \
+    php-common \
+    php-mysqlnd \
+    php-gd \
+    php-xml \
+    php-mbstring \
+    php-mcrypt \
+    php-zip \
+    php-intl \
+    php-fpm \
+    php-cli \
+    php-redis \
+    php-opcache \
+    php-pgsql \
+    php-ldap \
+    php-bcmath \
+    php-mysqlnd \
+  && dnf clean all \
+  && wget -qO /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+  && chmod +x /usr/local/bin/wp
 
 #     
+#     php-mysql \
 #     strace \
 #     npm \
 #     locales \
@@ -73,11 +73,13 @@ RUN dnf upgrade -y --refresh \
 
 
 # Preparar o diretório para SSH e configurar o acesso sem senha para o usuário root
-RUN echo 'PermitRootLogin no' >> /etc/ssh/sshd_config \
- && echo 'PasswordAuthentication no' >> /etc/ssh/sshd_config \
- && echo 'ChallengeResponseAuthentication no' >> /etc/ssh/sshd_config \
- && sed -i 's/UsePAM.*/UsePAM yes/'  /etc/ssh/sshd_config
-# mkdir /var/run/sshd \
+RUN mkdir /var/run/sshd \
+  && echo 'PermitRootLogin no' >> /etc/ssh/sshd_config \
+  && echo 'PasswordAuthentication no' >> /etc/ssh/sshd_config \
+  && echo 'ChallengeResponseAuthentication no' >> /etc/ssh/sshd_config \
+  && sed -i 's/UsePAM.*/UsePAM yes/'  /etc/ssh/sshd_config
+  && ssh-keygen -A
+
 
 ENV LANG pt_BR.UTF-8
 ENV LANGUAGE pt_BR:pt
