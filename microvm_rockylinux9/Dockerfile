@@ -77,8 +77,7 @@ RUN mkdir /var/run/sshd \
   && echo 'PermitRootLogin no' >> /etc/ssh/sshd_config \
   && echo 'PasswordAuthentication no' >> /etc/ssh/sshd_config \
   && echo 'ChallengeResponseAuthentication no' >> /etc/ssh/sshd_config \
-  && sed -i 's/UsePAM.*/UsePAM yes/'  /etc/ssh/sshd_config
-  && ssh-keygen -A
+  && sed -i 's/UsePAM.*/UsePAM yes/' /etc/ssh/sshd_config
 
 
 ENV LANG pt_BR.UTF-8
