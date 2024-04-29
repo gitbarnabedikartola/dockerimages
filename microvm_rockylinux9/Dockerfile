@@ -5,8 +5,8 @@ FROM rockylinux:9
 RUN dnf upgrade -y --refresh \
   && dnf -y install epel-release \
   && dnf -y update \
-  && dnf -y install 
-#     mysql \
+  && dnf -y install \
+    mysql 
 #     nano \
 #     vim \
 #     composer \
