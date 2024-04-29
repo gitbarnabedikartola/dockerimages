@@ -16,7 +16,7 @@ jobs:
       - name: Set Release
         shell: bash
         run: |
-          RELEASE=microVmRockyLinux9
+          RELEASE=microvm_rockylinux9
           
           echo "RELEASE=$RELEASE" >> $GITHUB_ENV
           echo "RELEASETAG=$(date +%Y%m%d.%H%M)" >> $GITHUB_ENV
@@ -48,8 +48,8 @@ jobs:
       - name: Build Multi-Arch
         uses: docker/build-push-action@v5
         with:
-          context: microVmRockyLinux9/
-          file: ${{ env.RELEASE }}/Dockerfile
+          context: ${{ env.RELEASE }}
+          file: Dockerfile
           # build-args: |
           #   PUBLIC_URL=./
           #   NODE_IMAGE=${{ env.NODE_IMAGE }}
