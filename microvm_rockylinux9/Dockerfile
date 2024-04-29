@@ -2,7 +2,9 @@
 FROM rockylinux:9-minimal
 
 # Instalar pacotes necessários
-RUN dnf -y install epel-release 
+RUN dnf upgrade --refresh \
+  && dnf config-manager --set-enabled crb \
+  && dnf -y install epel-release 
 #     && dnf -y update \
 #     && dnf -y install \
 #     mysql \
