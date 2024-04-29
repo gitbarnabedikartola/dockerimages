@@ -65,10 +65,10 @@ RUN dnf -y install dnf-plugins-core \
 #     php8.1-exif \
 #     php8.1-opcache \
 #     php8.1-imagick \
- && locale-gen pt_BR.UTF-8 \
- && ln -fs /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime \
- && dpkg-reconfigure --frontend noninteractive tzdata \
- && rm -rf /var/lib/apt/lists/* \
+#  && locale-gen pt_BR.UTF-8 \
+#  && ln -fs /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime \
+#  && dpkg-reconfigure --frontend noninteractive tzdata \
+#  && rm -rf /var/lib/apt/lists/* \
 
 
 # Preparar o diretório para SSH e configurar o acesso sem senha para o usuário root
