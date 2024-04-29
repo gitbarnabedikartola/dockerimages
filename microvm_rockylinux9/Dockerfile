@@ -72,11 +72,11 @@ RUN dnf upgrade -y --refresh \
 
 
 # Preparar o diretório para SSH e configurar o acesso sem senha para o usuário root
-RUN mkdir /var/run/sshd \
- && echo 'PermitRootLogin no' >> /etc/ssh/sshd_config \
+RUN echo 'PermitRootLogin no' >> /etc/ssh/sshd_config \
  && echo 'PasswordAuthentication no' >> /etc/ssh/sshd_config \
  && echo 'ChallengeResponseAuthentication no' >> /etc/ssh/sshd_config \
  && sed -i 's/UsePAM.*/UsePAM yes/'  /etc/ssh/sshd_config
+# mkdir /var/run/sshd \
 
 ENV LANG pt_BR.UTF-8
 ENV LANGUAGE pt_BR:pt
