@@ -2,8 +2,7 @@
 FROM rockylinux:9-minimal
 
 # Instalar pacotes necessários
-RUN dnf -y install dnf-plugins-core 
-#     && dnf -y install epel-release \
+RUN dnf -y install epel-release 
 #     && dnf -y update \
 #     && dnf -y install \
 #     mysql \
