@@ -3,8 +3,8 @@ name: 'GitHub Runner Ubuntu 22.04'
 on:
   workflow_dispatch:
   push:
-    # branches-ignore:
-      # - '**'
+    branches-ignore:
+      - '**'
 
 jobs:
   docker:
