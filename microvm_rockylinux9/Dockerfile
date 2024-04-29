@@ -6,40 +6,40 @@ RUN dnf -y install dnf-plugins-core \
     && dnf -y install epel-release \
     && dnf -y update \
     && dnf -y install \
-    mysql \
-    nano \
-    vim \
-    composer \
-    bash-completion \
-    tar \
-    zip \
-    git \
-    supervisor \
-    wget \
-    curl \
-    telnet \
-    htop \
-    php \
-    php-common \
-    php-mysql \
-    php-mysqlnd \
-    php-gd \
-    php-xml \
-    php-mbstring \
-    php-mcrypt \
-    php-zip \
-    php-intl \
-    php-fpm \
-    php-cli \
-    php-redis \
-    php-opcache \
-    php-pgsql \
-    php-ldap \
-    php-bcmath \
-    php-mysqlnd \
-  && dnf clean \
-  && wget -qO /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
-  && chmod +x /usr/local/bin/wp
+    mysql 
+#     nano \
+#     vim \
+#     composer \
+#     bash-completion \
+#     tar \
+#     zip \
+#     git \
+#     supervisor \
+#     wget \
+#     curl \
+#     telnet \
+#     htop \
+#     php \
+#     php-common \
+#     php-mysql \
+#     php-mysqlnd \
+#     php-gd \
+#     php-xml \
+#     php-mbstring \
+#     php-mcrypt \
+#     php-zip \
+#     php-intl \
+#     php-fpm \
+#     php-cli \
+#     php-redis \
+#     php-opcache \
+#     php-pgsql \
+#     php-ldap \
+#     php-bcmath \
+#     php-mysqlnd \
+#   && dnf clean \
+#   && wget -qO /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+#   && chmod +x /usr/local/bin/wp
 
 #     openssh-server \
 #     strace \
