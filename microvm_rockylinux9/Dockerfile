@@ -19,28 +19,28 @@ RUN dnf upgrade -y --refresh \
     wget \
     curl \
     telnet \
-    htop \
-    php \
-    php-common \
-    php-mysql \
-    php-mysqlnd \
-    php-gd \
-    php-xml \
-    php-mbstring \
-    php-mcrypt \
-    php-zip \
-    php-intl \
-    php-fpm \
-    php-cli \
-    php-redis \
-    php-opcache \
-    php-pgsql \
-    php-ldap \
-    php-bcmath \
-    php-mysqlnd \
-  && dnf clean \
-  && wget -qO /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
-  && chmod +x /usr/local/bin/wp
+    htop 
+#     php \
+#     php-common \
+#     php-mysql \
+#     php-mysqlnd \
+#     php-gd \
+#     php-xml \
+#     php-mbstring \
+#     php-mcrypt \
+#     php-zip \
+#     php-intl \
+#     php-fpm \
+#     php-cli \
+#     php-redis \
+#     php-opcache \
+#     php-pgsql \
+#     php-ldap \
+#     php-bcmath \
+#     php-mysqlnd \
+#   && dnf clean \
+#   && wget -qO /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+#   && chmod +x /usr/local/bin/wp
 
 #     
 #     strace \
