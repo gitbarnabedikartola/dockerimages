@@ -7,7 +7,7 @@ RUN dnf upgrade -y --refresh \
   && dnf -y update \
   && dnf -y install \
     mysql \
-    openssh \
+    openssh-server \
     nano \
     vim \
     composer \
