@@ -1,12 +1,11 @@
 # Usar a imagem base do Ubuntu
-FROM rockylinux:9-minimal
+FROM rockylinux:9
 
 # Instalar pacotes necessários
-RUN dnf upgrade --refresh \
-  && dnf config-manager --set-enabled crb \
-  && dnf -y install epel-release 
-#     && dnf -y update \
-#     && dnf -y install \
+RUN dnf upgrade -y --refresh \
+  && dnf -y install epel-release \
+  && dnf -y update \
+  && dnf -y install 
 #     mysql \
 #     nano \
 #     vim \
