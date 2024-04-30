@@ -39,7 +39,11 @@ RUN dnf upgrade -y --refresh \
     php-mysqlnd \
   && dnf clean all \
   && wget -qO /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
-  && chmod +x /usr/local/bin/wp
+  && chmod +x /usr/local/bin/wp \
+  && wget https://github.com/starship/starship/releases/latest/download/starship-$(uname -i)-unknown-linux-musl.tar.gz -O starship.tar.gz \
+  && tar -xf starship.tar.gz -C /usr/bin \
+  && rm -rf starship.tar.gz \
+  && chmod +x /usr/bin/starship 
 
 #     
 #     php-mysql \
