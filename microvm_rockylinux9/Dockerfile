@@ -21,6 +21,11 @@ RUN dnf upgrade -y --refresh \
     telnet \
     htop \
     php \
+    rsync \
+    strace \
+    npm \
+    iputils \
+    findutils \
     php-common \
     php-mysqlnd \
     php-gd \
@@ -28,7 +33,6 @@ RUN dnf upgrade -y --refresh \
     php-mbstring \
     php-mcrypt \
     php-zip \
-    php-intl \
     php-fpm \
     php-cli \
     php-redis \
@@ -47,13 +51,8 @@ RUN dnf upgrade -y --refresh \
 
 #     
 #     php-mysql \
-#     strace \
-#     npm \
 #     locales \
-#     iputils-ping \
-#     telnet \
-#     findutils \
-#     rsync \
+#     php-intl \
 #     php8.1-apcu \
 #     php8.1-imap \
 #     php8.1-cgi \

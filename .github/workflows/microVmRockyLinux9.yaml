@@ -3,8 +3,8 @@ name: 'Micro VM RockyLinux9'
 on:
   workflow_dispatch:
   push:
-    # branches-ignore:
-    #   - '**'
+    branches-ignore:
+      - '**'
 
 jobs:
   docker:
