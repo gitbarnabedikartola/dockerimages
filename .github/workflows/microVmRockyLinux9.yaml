@@ -21,18 +21,19 @@ jobs:
           echo "RELEASE=$RELEASE" >> $GITHUB_ENV
           echo "RELEASETAG=$(date +%Y%m%d.%H%M)" >> $GITHUB_ENV
           
-      # - name: Hadolint
-      #   shell: bash -O extglob {0}
-      #   run: |
-      #     sudo wget -qO /usr/bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64
-      #     sudo chmod +x /bin/hadolint
-      #     hadolint ${{ env.RELEASE }}/Dockerfile
+      - name: Hadolint
+        shell: bash -O extglob {0}
+        run: |
+          sudo wget -qO /usr/bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64
+          sudo chmod +x /bin/hadolint
+          export HADOLINT_NOFAIL=true
+          hadolint ${{ env.RELEASE }}/Dockerfile
       
-      - name: Lint Dockerfile
-        uses: hadolint/hadolint-action@master
-        with:
-          dockerfile: "${{ env.RELEASE }}/Dockerfile"
-          no-fail: true
+      # - name: Hadolint
+      #   uses: hadolint/hadolint-action@master
+      #   with:
+      #     dockerfile: "${{ env.RELEASE }}/Dockerfile"
+      #     no-fail: true
           
       - name: Echo Release
         shell: bash
