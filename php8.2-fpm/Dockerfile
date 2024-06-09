@@ -48,6 +48,7 @@ php8.2-phar \
 php8.2-exif \
 php8.2-opcache \
 php8.2-imagick \
+libjpeg-turbo-progs \
 locales
 RUN apt clean all
 
