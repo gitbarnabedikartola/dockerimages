@@ -67,8 +67,8 @@ jobs:
           # build-args: |
           #   PUBLIC_URL=./
           #   NODE_IMAGE=${{ env.NODE_IMAGE }}
-          # platforms: linux/amd64,linux/arm64
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64
+          # platforms: linux/amd64
           push: true
           tags: |
             barnabenimbus/${{ env.RELEASE }}:${{ env.RELEASETAG }}
