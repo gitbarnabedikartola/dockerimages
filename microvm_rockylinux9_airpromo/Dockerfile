@@ -49,6 +49,7 @@ RUN dnf upgrade -y --refresh \
   && rm -rf starship.tar.gz \
   && chmod +x /usr/bin/starship \
   && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash \
+  && source /root/.bashrc \
   && nvm install 20
 
 
