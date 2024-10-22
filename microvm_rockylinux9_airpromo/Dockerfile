@@ -52,8 +52,6 @@ RUN dnf upgrade -y --refresh \
   && source /root/.bashrc \
   && nvm install 20
 
-
-
 # Preparar o diretório para SSH e configurar o acesso sem senha para o usuário root
 RUN mkdir /var/run/sshd \
   && echo 'PermitRootLogin no' >> /etc/ssh/sshd_config \

@@ -1,0 +1,66 @@
+name: 'Container Image Builder'
+
+inputs:
+  releaseName:
+    # default:
+    required: true
+  releaseTag:
+    required: true
+  registry:
+    default: docker.io
+    required: false
+  registryUser:
+    required: true
+  registryPassword:
+    required: true
+  registryProject:
+    required: true
+  archs:
+    default: linux/amd64,linux/arm64
+    required: false
+
+
+runs:
+  using: "composite"
+  steps:
+    - name: Hadolint
+      env:
+        releaseName: ${{ inputs.releaseName }}
+      shell: bash -O extglob {0}
+      run: |
+        sudo wget -qO /usr/bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64
+        sudo chmod +x /bin/hadolint
+        export HADOLINT_NOFAIL=true
+        hadolint $releaseName/Dockerfile
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@master
+      with:
+        platforms: all
+
+    - name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@master
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ inputs.registry }}
+        username: ${{ inputs.registryUser }}
+        password: ${{ inputs.registryPassword }}
+
+    - name: Build Multi-Arch
+      uses: docker/build-push-action@v5
+      env:
+        releaseName: ${{ inputs.releaseName }}
+        releaseTag: ${{ inputs.releaseTag }}
+        archs: ${{ inputs.archs }}
+        registryProject: ${{ inputs.registryProject }}
+      with:
+        context: $releaseName
+        file: $$releaseName/Dockerfile
+        platforms: $archs
+        push: true
+        tags: |
+          $registryProject/$releaseName:latest
+          $registryProject/$releaseName:$releaseTag
