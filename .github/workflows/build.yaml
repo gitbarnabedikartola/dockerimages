@@ -32,7 +32,7 @@ jobs:
     needs: [releases]
     strategy:
       matrix:
-        releases: ${{fromJSON(needs.releases.outputs.releaseName)}}
+        releases: ${{ fromJSON(needs.releases.outputs.releaseName) }}
 
     steps:
       - name: Checkout
