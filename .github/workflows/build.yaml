@@ -24,7 +24,7 @@ jobs:
           echo "releases=$releases" >> $GITHUB_ENV
           echo "releaseTag=$(date +%Y%m%d.%H%M)" >> $GITHUB_ENV
     outputs:
-      releaseName: ${{ stpes.relese.outputs.releases }}
+      releaseName: ${{ steps.relese.outputs.releases }}
       releaseTag: ${{ steps.relese.outputs.releaseTag }}
 
   build-release:
