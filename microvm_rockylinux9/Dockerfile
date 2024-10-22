@@ -89,7 +89,7 @@ ENV LANGUAGE pt_BR:pt
 ENV LC_ALL pt_BR.UTF-8
 
 # Definir o diretório de trabalho
-WORKDIR /var/www/vhosts/
+WORKDIR /var/www/
 
 # Expor a porta do SSH
 EXPOSE 22
