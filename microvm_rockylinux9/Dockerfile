@@ -100,3 +100,4 @@ EXPOSE 22
 
 # Definir o script de inicialização como ponto de entrada
 ENTRYPOINT ["/usr/local/bin/start-microvm.sh"]
+
