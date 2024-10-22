@@ -1,8 +1,6 @@
 # Usar a imagem base do Ubuntu
 FROM rockylinux:9
 
-ARG user
-
 # Instalar pacotes necessários
 RUN dnf upgrade -y --refresh \
   && dnf -y install epel-release \
@@ -28,6 +26,7 @@ RUN dnf upgrade -y --refresh \
     npm \
     iputils \
     findutils \
+    glibc-langpack-pt \
     php-common \
     php-mysqlnd \
     php-gd \
@@ -88,9 +87,6 @@ RUN mkdir /var/run/sshd \
 ENV LANG pt_BR.UTF-8
 ENV LANGUAGE pt_BR:pt
 ENV LC_ALL pt_BR.UTF-8
-
-# Define usuario
-USER $user
 
 # Definir o diretório de trabalho
 WORKDIR /var/www/vhosts/
