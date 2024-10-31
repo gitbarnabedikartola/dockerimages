@@ -20,6 +20,8 @@ RUN dnf upgrade -y --refresh \
     curl \
     telnet \
     htop \
+    gettext \
+    s3cmd \
     php \
     rsync \
     strace \
